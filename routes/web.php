@@ -1,6 +1,12 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+
+###TEST
+/* 
+use Illuminate\Support\Facades\Config; //TEST
+ */
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +20,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('welcome',);
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard',['principal' => 'active']);
+})->middleware(['auth', 'verifyEmail'])->name('dashboard');
+
+### CRUD User
+Route::get('userChangeViewMode', [UserController::class, 'changeViewMode'])->middleware(['auth', 'verifyEmail'])->name('user.index');
+
+require __DIR__.'/auth.php';

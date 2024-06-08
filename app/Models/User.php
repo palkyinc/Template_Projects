@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'expire_at',
     ];
 
     /**
@@ -41,4 +42,8 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function dayNight() {
+        return $this->view_mode ? 'night' : '';
+    }
 }
