@@ -131,29 +131,37 @@ class UserController extends Controller
         $nombre = $request->input('name');
         $email = $request->input('email');
         $User = User::find($request->input('id'));
-        $this->validar($request, $User->id);
+        $this->validar($request, $User->id, true);
         $User->name = $nombre;
         $User->email = $email;
+        if ($User->email != $User->getOriginal()['email']) {
+            $User->email_verified_at = null;
+            $respuesta[] = ' Email: ' . $User->getOriginal()['email'] . ' POR ' . $User->email;
+        }
         $User->save();
-        $respuesta[] = 'Se cambió con exito:';
         if ($User->name != $User->getOriginal()['name']) {
             $respuesta[] = ' Nombre: ' . $User->getOriginal()['name'] . ' POR ' . $User->name;
         }
         return redirect('adminUsers')->with('mensaje', $respuesta);
     }
 
-    public function validar(Request $request, $idUser = "")
+    public function validar(Request $request, $idUser = "", $update = false)
     {
         if ($idUser) {
             $condicion = 'required|email:rfc,dns|unique:users,email,' . $idUser;
         } else {
             $condicion = 'required|email:rfc,dns|unique:users,email';
         }
+        if ($update) {
+            $password = ['confirmed', new ComplexPasswordRule()];
+        } else {
+            $password = ['required', 'confirmed', new ComplexPasswordRule()];
+        }
         $request->validate(
             [
                 'name' => 'required|min:2|max:255',
                 'email' => $condicion,
-                'password' => ['required', 'confirmed', new ComplexPasswordRule()]
+                'password' => $password
             ]
         );
     }

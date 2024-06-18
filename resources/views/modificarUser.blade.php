@@ -14,11 +14,11 @@ $mostrarSololectura = true;
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="name">Nombre: </label>
-                <input type="text" name="name" value="{{$elemento->name}}" maxlength="255"  class="form-control">
+                <input type="text" name="name" value="{{old('name') ?? $elemento->name}}" maxlength="255"  class="form-control">
             </div>
              <div class="form-group col-md-8">
                 <label for="email">Correo Electrónico: </label>
-                <input type="email" name="email" value="{{$elemento->email}}" class="form-control">
+                <input type="email" name="email" value="{{old('email') ?? $elemento->email}}" class="form-control">
             </div>
         </div>
             <input type="hidden" name="id" value="{{$elemento->id}}">

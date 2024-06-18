@@ -36,9 +36,9 @@
 							Sistema
 						</a>
 						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-							<li><a class="dropdown-item" href="adminUsers">Usuarios</a></li>
-							<li><a class="dropdown-item" href="adminRoles">Roles</a></li>
-							<li><a class="dropdown-item" href="adminPermissions">Permisos</a></li>
+							<li><a class="dropdown-item" href="/adminUsers">Usuarios</a></li>
+							<li><a class="dropdown-item" href="/adminRoles">Roles</a></li>
+							<li><a class="dropdown-item" href="/adminPermissions">Permisos</a></li>
 						</ul>
 					</li>
 				</ul>
